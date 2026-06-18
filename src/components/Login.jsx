@@ -93,7 +93,3 @@ export default function Login() {
     </form>
   );
 }
-
-// git add .
-// git commit -m "Project Updated"
-// git push origin main
