@@ -17,6 +17,10 @@ export default function Login() {
       ...prevValues,
       [identifier]: value,
     }));
+    setIsFocused((prevState) => ({
+      ...prevState,
+      [identifier]: false,
+    }));
   }
 
   function handleSubmit(event) {
@@ -37,7 +41,7 @@ export default function Login() {
             type="email"
             name="email"
             value={formValues.email}
-            onFocus={() => setIsFocused({ ...isFocused, email: true })}
+            onBlur={() => setIsFocused({ ...isFocused, email: true })}
             onChange={(event) =>
               handleValuesChange("email", event.target.value)
             }
@@ -57,7 +61,7 @@ export default function Login() {
             type="password"
             name="password"
             value={formValues.password}
-            onFocus={() => setIsFocused({ ...isFocused, password: true })}
+            onBlur={() => setIsFocused({ ...isFocused, password: true })}
             onChange={(event) =>
               handleValuesChange("password", event.target.value)
             }
