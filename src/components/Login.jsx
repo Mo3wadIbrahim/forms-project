@@ -64,11 +64,7 @@ export default function Login() {
           />
           {isFocused.password && !isPasswordValid && (
             <div className="control-error">
-              <p>
-                Password must be at least 8 characters long and include at least
-                one lowercase letter, one uppercase letter, one digit, and one
-                special character.
-              </p>
+              <p>Please enter a valid password.</p>
             </div>
           )}
         </div>
