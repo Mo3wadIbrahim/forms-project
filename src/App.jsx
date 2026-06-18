@@ -1,5 +1,5 @@
 import Header from "./components/Header.jsx";
-import Signup from "./components/Signup.jsx";
+import Login from "./components/Login.jsx";
 
 function App() {
   return (
@@ -7,7 +7,7 @@ function App() {
       <h1>Welcome to the React App</h1>
       <Header />
       <main>
-        <Signup />
+        <Login />
       </main>
     </>
   );
