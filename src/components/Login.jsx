@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
+
+import { isValidEmail, isValidPassword } from "../util/validation";
 // kdnkfbfkvnf
 export default function Login() {
   const [isFocused, setIsFocused] = useState({ email: false, password: false });
@@ -7,13 +9,7 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-    formValues.email,
-  );
-  const isPasswordValid =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/.test(
-      formValues.password,
-    );
+
   function handleValuesChange(identifier, value) {
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -48,7 +44,7 @@ export default function Login() {
           onChange={(event) => handleValuesChange("email", event.target.value)}
           error={
             isFocused.email &&
-            !isEmailValid &&
+            !isValidEmail(event.target.value) &&
             "Please enter a valid email address."
           }
         />
@@ -64,7 +60,7 @@ export default function Login() {
           }
           error={
             isFocused.password &&
-            !isPasswordValid &&
+            !isValidPassword(event.target.value) &&
             "Please enter a valid password."
           }
         />
