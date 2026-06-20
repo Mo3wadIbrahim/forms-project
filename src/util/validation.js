@@ -4,11 +4,12 @@ export function isEmpty(value) {
 export function isEqual(value1, value2) {
   return value1 === value2;
 }
-export const isValidEmail = (value) => {
-  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
-};
 export const isValidPassword = (value) => {
   return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/.test(
     value,
   );
+};
+
+export const isValidEmail = (value) => {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
 };
