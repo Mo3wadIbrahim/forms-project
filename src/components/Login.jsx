@@ -19,7 +19,9 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+
     console.log("submited");
+    handelReset();
   }
   function handelReset() {
     handleEmailChange("");
@@ -67,7 +69,11 @@ export default function Login() {
         >
           Reset
         </button>
-        <button className="button" type="submit">
+        <button
+          className="button"
+          type="submit"
+          disabled={!isValidEmail(email) || !isValidPassword(password)}
+        >
           Login
         </button>
       </p>
