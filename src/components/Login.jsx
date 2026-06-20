@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Input from "./Input";
 // kdnkfbfkvnf
 export default function Login() {
   const [isFocused, setIsFocused] = useState({ email: false, password: false });
@@ -30,49 +31,43 @@ export default function Login() {
     setFormValues({ email: "", password: "" });
   }
 
+  function handleBlur(identifier) {
+    setIsFocused({ ...isFocused, [identifier]: true });
+  }
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
-
       <div className="control-row">
-        <div className="control no-margin">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={formValues.email}
-            onBlur={() => setIsFocused({ ...isFocused, email: true })}
-            onChange={(event) =>
-              handleValuesChange("email", event.target.value)
-            }
-          />
-          {isFocused.email && !isEmailValid && (
-            <div className="control-error">
-              <p>Please enter a valid email address.</p>
-              <p style={{ color: "darkgray" }}>Example: user@example.com</p>
-            </div>
-          )}
-        </div>
-
-        <div className="control no-margin">
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={formValues.password}
-            onBlur={() => setIsFocused({ ...isFocused, password: true })}
-            onChange={(event) =>
-              handleValuesChange("password", event.target.value)
-            }
-          />
-          {isFocused.password && !isPasswordValid && (
-            <div className="control-error">
-              <p>Please enter a valid password.</p>
-            </div>
-          )}
-        </div>
+        <Input
+          id="email"
+          type="email"
+          name="email"
+          label="Email"
+          value={formValues.email}
+          onBlur={() => handleBlur("email")}
+          onChange={(event) => handleValuesChange("email", event.target.value)}
+          error={
+            isFocused.email &&
+            !isEmailValid &&
+            "Please enter a valid email address."
+          }
+        />
+        <Input
+          id="password"
+          type="password"
+          name="password"
+          label="password"
+          value={formValues.password}
+          onBlur={() => handleBlur("password")}
+          onChange={(event) =>
+            handleValuesChange("password", event.target.value)
+          }
+          error={
+            isFocused.password &&
+            !isPasswordValid &&
+            "Please enter a valid password."
+          }
+        />
       </div>
 
       <p className="form-actions">
@@ -83,11 +78,7 @@ export default function Login() {
         >
           Reset
         </button>
-        <button
-          className="button"
-          type="submit"
-          disabled={!(isEmailValid && isPasswordValid)}
-        >
+        <button className="button" type="submit">
           Login
         </button>
       </p>
