@@ -1,8 +1,7 @@
 import { useState } from "react";
-import Input from "./Input";
+import Input from "./Input.jsx";
 
-import { isValidEmail, isValidPassword } from "../util/validation";
-// kdnkfbfkvnf
+import { isValidEmail, isValidPassword } from "../util/validation.js";
 export default function Login() {
   const [isFocused, setIsFocused] = useState({ email: false, password: false });
   const [formValues, setFormValues] = useState({
@@ -47,6 +46,7 @@ export default function Login() {
             !isValidEmail(event.target.value) &&
             "Please enter a valid email address."
           }
+          required
         />
         <Input
           id="password"
@@ -60,9 +60,10 @@ export default function Login() {
           }
           error={
             isFocused.password &&
-            !isValidPassword(event.target.value) &&
+            !isValidPassword(event.target.value, 8) &&
             "Please enter a valid password."
           }
+          required
         />
       </div>
 

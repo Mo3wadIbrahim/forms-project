@@ -17,8 +17,11 @@ export function isEqualsToOtherValue(value, otherValue) {
 export const isValidEmail = (value) => {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value);
 };
-export const isValidPassword = (value) => {
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/.test(
-    value,
-  );
+export const isValidPassword = (value, length) => {
+  // Construct the regex string dynamically using the length parameter
+  const regexString = `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{${length},}$`;
+
+  const passwordRegex = new RegExp(regexString);
+
+  return passwordRegex.test(value);
 };
