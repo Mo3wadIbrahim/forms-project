@@ -9,24 +9,23 @@ export default function Login() {
     isEdit: isEmailEdit,
     handleValuesChange: handleEmailChange,
     handleEdit: handleEmailBlur,
-  } = useInput("");
+    hasError: emailHasError,
+  } = useInput("", (value) => isValidEmail(value));
   const {
     entredValue: password,
     isEdit: isPasswordEdit,
     handleValuesChange: handlePasswordChange,
     handleEdit: handlePasswordBlur,
-  } = useInput("");
+    hasError: passwordHasError,
+  } = useInput("", (value) => isValidPassword(value));
 
   function handleSubmit(event) {
     event.preventDefault();
-
     console.log("submited");
-    handelReset();
-  }
-  function handelReset() {
     handleEmailChange("");
     handlePasswordChange("");
   }
+
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
@@ -41,7 +40,7 @@ export default function Login() {
           onChange={(event) => handleEmailChange(event.target.value)}
           error={
             isEmailEdit &&
-            !isValidEmail(email) &&
+            !emailHasError &&
             "Please enter a valid email address."
           }
         />
@@ -55,18 +54,14 @@ export default function Login() {
           onChange={(event) => handlePasswordChange(event.target.value)}
           error={
             isPasswordEdit &&
-            !isValidPassword(password) &&
+            !passwordHasError &&
             "Please enter a valid email address."
           }
         />
       </div>
 
       <p className="form-actions">
-        <button
-          className="button button-flat"
-          type="reset"
-          onClick={handelReset}
-        >
+        <button className="button button-flat" type="reset">
           Reset
         </button>
         <button
